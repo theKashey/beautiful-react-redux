@@ -27,5 +27,15 @@ PS: Better not to mix them - check also has memoization underneath.
 
 PPS: This is literally 3 lines of code.
 
+# IE11 and React-native users!
+This library uses ES6 Proxy and Reflection underneath. In order to run it you
+have to include polyfill - https://github.com/tvcutsem/harmony-reflect
+
+```js
+npm install harmony-reflect
+```
+
+Consider double measure performance, or use only `beautiful-react-redux/check` and another memoization library.
+
 # Licence
 MIT
