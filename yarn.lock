@@ -1176,11 +1176,11 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-memoize-state@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.0.2.tgz#6e2d0d37bc35dacfd16ff17134b8629abb1f72b4"
+memoize-state@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.1.0.tgz#86d622e9a2aef75e3bd2e88c2e6b2f70830e28ce"
   dependencies:
-    proxyequal "^1.0.4"
+    proxyequal "^1.1.1"
 
 micromatch@^2.1.5:
   version "2.3.11"
@@ -1372,9 +1372,9 @@ process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
 
-proxyequal@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/proxyequal/-/proxyequal-1.0.4.tgz#cc0a85da4c31e7ac767e02ee5273c1ecd910ffcf"
+proxyequal@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/proxyequal/-/proxyequal-1.1.1.tgz#263d123c300f7f5034574aa5daf728ece8256785"
   dependencies:
     search-trie "^1.0.0"
 

@@ -2,4 +2,22 @@ import * as redux from 'react-redux';
 import memoize from 'memoize-state';
 
 const c = redux.connect;
-redux.connect = (a, ...rest) => c.call(redux, a ? memoize(a) : a, ...rest);
+redux.connect = (mapStateToProps,
+                 mapDispatchToProps,
+                 mergeProps,
+                 options) => {
+
+  if (options && ('pure' in options) && options.pure) {
+    return c.call(redux, mapStateToProps,
+      mapDispatchToProps,
+      mergeProps,
+      options)
+  }
+
+  return c.call(redux,
+    mapStateToProps && memoize(mapStateToProps, {safe: true}),
+    mapDispatchToProps,
+    mergeProps,
+    options
+  );
+};
