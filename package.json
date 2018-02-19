@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/theKashey/beautiful-react-redux#readme",
   "dependencies": {
-    "memoize-state": "^1.1.1"
+    "memoize-state": "^1.1.2"
   }
 }

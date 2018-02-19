@@ -1176,9 +1176,9 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-memoize-state@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.1.1.tgz#0520d0a16978b744189f68732661ddfaae81b5a1"
+memoize-state@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.1.2.tgz#167552649237b3b9b60efe0dae911b6b569be177"
   dependencies:
     proxyequal "^1.2.0"
 
