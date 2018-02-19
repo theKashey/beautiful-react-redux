@@ -15,7 +15,7 @@ redux.connect = (mapStateToProps,
   }
 
   return c.call(redux,
-    mapStateToProps && memoize(mapStateToProps, {safe: true}),
+    mapStateToProps && memoize(mapStateToProps, {strictArguments: true}),
     mapDispatchToProps,
     mergeProps,
     options
