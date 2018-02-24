@@ -1,11 +1,19 @@
 {
   "name": "beautiful-react-redux",
   "version": "1.0.8",
-  "description": "A magical tool to improve React-Redux",
+  "description": "A magical tool to improve React-Redux performance",
   "main": "lib/index.js",
   "files": [
     "check.js",
     "memoize.js"
+  ],
+  "keywords": [
+    "react",
+    "redux",
+    "memoize",
+    "mapStateToProps",
+    "selector",
+    "redraw"
   ],
   "scripts": {
     "test": "npm run test:pick -- '_tests/**/*spec.js'",
@@ -30,6 +38,6 @@
   },
   "homepage": "https://github.com/theKashey/beautiful-react-redux#readme",
   "dependencies": {
-    "memoize-state": "^1.1.2"
+    "memoize-state": "^1.1.3"
   }
 }
