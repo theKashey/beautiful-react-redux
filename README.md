@@ -11,9 +11,17 @@ No updates when you dont expect them. For all. For free!
 [![NPM](https://nodei.co/npm/beautiful-react-redux.png?downloads=true&stars=true)](https://nodei.co/npm/beautiful-react-redux/)
 
 ## Usage
+
+#### Auto-magic
 ```js
 // to get automatic deep-equal memoization for all mapStateToProps
-import 'beautiful-react-redux/memoize';
+import 'beautiful-react-redux/patch';
+```
+
+#### Or just replace react-redux by beautiful-react-redux
+```js
+//import {connect, Provider} from 'react-redux';
+import {connect, Provider} from 'beautiful-react-redux';
 ```
 
 If you already handling selectors by your own, and dont need external tools - 
