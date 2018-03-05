@@ -2,13 +2,14 @@ import {Component} from 'react';
 import {connect as reactReduxConnect, Provider} from 'react-redux';
 import memoize from 'memoize-state';
 
+const realReactReduxConnect = reactReduxConnect;
 const connect = (mapStateToProps,
-                        mapDispatchToProps,
-                        mergeProps,
-                        options) => {
+                 mapDispatchToProps,
+                 mergeProps,
+                 options) => {
 
   if (options && ('pure' in options) && !options.pure) {
-    return reactReduxConnect(
+    return realReactReduxConnect(
       mapStateToProps,
       mapDispatchToProps,
       mergeProps,
@@ -23,7 +24,7 @@ const connect = (mapStateToProps,
     const localMapStateToProps = memoizedMapStateToProps && mapStateToProps && memoize(memoizedMapStateToProps, {strictArguments: true});
 
     // TODO: create `areStatesEqual` based on memoize-state usage.
-    return reactReduxConnect(
+    return realReactReduxConnect(
       localMapStateToProps,
       mapDispatchToProps,
       mergeProps,

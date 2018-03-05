@@ -24,16 +24,17 @@ import 'beautiful-react-redux/patch';
 import {connect, Provider} from 'beautiful-react-redux';
 ```
 
+100% compatible with any other memoization you might already had underneath.
+
+#### Doubke check your existing selectors
 If you already handling selectors by your own, and dont need external tools - 
-you can just double check that your mapStateToProps are good enought.
+you can just double check that your mapStateToProps is good enough.
 ```js
 // to get automatic checks for your mapStateToProps
 import 'beautiful-react-redux/check';
 ```
 
-PS: Better not to mix them - check also has memoization underneath.
-
-PPS: This is literally 3 lines of code.
+PS: Better not to mix memoize and check.
 
 # IE11 and React-native users!
 This library uses ES6 Proxy and Reflection underneath. In order to run it you
