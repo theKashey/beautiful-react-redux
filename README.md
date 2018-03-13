@@ -26,7 +26,7 @@ import {connect, Provider} from 'beautiful-react-redux';
 
 100% compatible with any other memoization you might already had underneath.
 
-#### Doubke check your existing selectors
+#### Double check your existing selectors
 If you already handling selectors by your own, and dont need external tools - 
 you can just double check that your mapStateToProps is good enough.
 ```js
@@ -35,14 +35,6 @@ import 'beautiful-react-redux/check';
 ```
 
 PS: Better not to mix memoize and check.
-
-# IE11 and React-native users!
-This library uses ES6 Proxy and Reflection underneath. In order to run it you
-have to include polyfill - https://github.com/tvcutsem/harmony-reflect
-
-```js
-npm install harmony-reflect
-```
 
 Consider double measure performance, or use only `beautiful-react-redux/check` and another memoization library.
 
