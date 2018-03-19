@@ -2,7 +2,13 @@ import {connect as reactReduxConnect, Provider} from 'react-redux';
 import memoize, {shouldBePure} from 'memoize-state';
 import * as redux from "react-redux";
 
+let config = {
+  onNotPure: (...args) => console.error(...args)
+};
+
 const realReactReduxConnect = reactReduxConnect;
+
+
 const connect = (mapStateToProps,
                  mapDispatchToProps,
                  mergeProps,
@@ -24,7 +30,7 @@ const connect = (mapStateToProps,
 
     const localMapStateToProps = mapStateToProps && memoize(mapStateToProps, {strictArity: true})
 
-    function mapStateToPropsFabric () {
+    function mapStateToPropsFabric() {
       function finalMapStateToProps(state, props) {
         const result = localMapStateToProps(state, props);
 
@@ -68,7 +74,7 @@ const connect = (mapStateToProps,
     }
 
     // TODO: create `areStatesEqual` based on memoize-state usage.
-    const ImprovedComponent  = realReactReduxConnect(
+    const ImprovedComponent = realReactReduxConnect(
       localMapStateToProps && mapStateToPropsFabric,
       mapDispatchToProps,
       mergeProps,
@@ -85,11 +91,18 @@ const connect = (mapStateToProps,
   }
 };
 
-const connectAndCheck = (a, ...rest) => realReactReduxConnect(a ? shouldBePure(a) : a, ...rest);
+
+const onNotPure = (...args) => config.onNotPure(...args);
+const connectAndCheck = (a, ...rest) => realReactReduxConnect(a ? shouldBePure(a, {onTrigger: onNotPure}) : a, ...rest);
+
+const setConfig = options => {
+  config = Object.assign(config,options);
+};
 
 export {
   connect,
   Provider,
 
-  connectAndCheck
-}
+  connectAndCheck,
+  setConfig
+};

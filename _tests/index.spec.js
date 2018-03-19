@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReduxFocus} from 'react-redux-focus';
-import {connect, connectAndCheck} from '../src';
+import {connect, connectAndCheck, setConfig} from '../src';
 
 import EnzymeReactAdapter from 'enzyme-adapter-react-16';
 import {mount, configure as configureEnzyme} from 'enzyme';
@@ -133,6 +133,34 @@ describe('Test', () => {
     wrapper.setProps({state: {key1: 'key1-value', key2:2}});
 
     expect(spy).toHaveBeenCalledWith("shouldBePure", expect.anything(),"`s result is not equal at [subObjec], while should be equal");
+
+    spy.mockRestore();
+  });
+
+  it('should override callback', () => {
+
+    const mapStateToProps = (state, props) => ({
+      number: state[props.keyName],
+      test: state.flag ? state.secret : 0,
+      subObjec: {}
+    });
+
+    const cb = jest.fn();
+    const spy = jest.spyOn(global.console, 'error')
+    setConfig({onNotPure: cb})
+
+    const Component = ({number}) => <div>{number}</div>;
+    const ConnectedComponent = connectAndCheck(mapStateToProps)(Component);
+    const wrapper = mount(
+      <ReduxFocus focus={(state, props) => props.state} state={{key1: 'key1-value'}}>
+        <ConnectedComponent keyName="key1"/>
+      </ReduxFocus>
+    );
+    wrapper.setProps({state: {key1: 'key1-value', key2:2}});
+
+
+    expect(cb).toHaveBeenCalledWith("shouldBePure", expect.anything(),"`s result is not equal at [subObjec], while should be equal");
+    expect(spy).not.toHaveBeenCalled();
 
     spy.mockRestore();
   });

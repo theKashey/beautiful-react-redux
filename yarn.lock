@@ -2745,9 +2745,9 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-memoize-state@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.2.2.tgz#ad25d1044a3c5fc3421d36bbe7aabaaa664979aa"
+memoize-state@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.3.0.tgz#6357835fc17182a0d1fc754a44942f83fb7d5e68"
   dependencies:
     proxyequal "^1.4.1"
 
