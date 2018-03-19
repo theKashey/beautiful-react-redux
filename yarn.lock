@@ -2745,11 +2745,11 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-memoize-state@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.3.0.tgz#6357835fc17182a0d1fc754a44942f83fb7d5e68"
+memoize-state@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/memoize-state/-/memoize-state-1.3.1.tgz#85adc3708e44e92986542821b210ba5586eff6c0"
   dependencies:
-    proxyequal "^1.4.1"
+    proxyequal "^1.5.0"
 
 merge-stream@^1.0.1:
   version "1.0.1"
@@ -3276,15 +3276,10 @@ prop-types@^15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-proxy-polyfill@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/proxy-polyfill/-/proxy-polyfill-0.2.0.tgz#3c9d2a0fe7682c3903674e304f5d27797b711446"
-
-proxyequal@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/proxyequal/-/proxyequal-1.4.1.tgz#8b1492aba54a3f54ebb3406c5df7b825ddf1545a"
+proxyequal@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/proxyequal/-/proxyequal-1.5.0.tgz#634909ae7441860b5f23486218acc00018126562"
   dependencies:
-    proxy-polyfill "^0.2.0"
     search-trie "^1.0.0"
 
 pseudomap@^1.0.2:
