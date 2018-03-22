@@ -1,6 +1,6 @@
 import {connect as reactReduxConnect, Provider} from 'react-redux';
 import memoize, {shouldBePure} from 'memoize-state';
-import * as redux from "react-redux";
+import functionDouble from 'function-double';
 
 let config = {
   onNotPure: (...args) => console.error(...args)
@@ -44,17 +44,7 @@ const connect = (mapStateToProps,
       }
 
       if (localMapStateToProps) {
-        Object.defineProperty(finalMapStateToProps, 'length', {
-          writable: false,
-          configurable: true,
-          value: localMapStateToProps.length,
-        });
-
-        Object.defineProperty(finalMapStateToProps, 'cacheStatistics', {
-          get: () => localMapStateToProps.cacheStatistics,
-          configurable: true,
-          enumerable: false,
-        });
+        functionDouble(finalMapStateToProps, localMapStateToProps);
 
         Object.defineProperty(finalMapStateToProps, 'trackedKeys', {
           get: () => lastAffectedPaths,
@@ -73,7 +63,6 @@ const connect = (mapStateToProps,
       return lastAffectedPaths.reduce((acc, key) => acc && state1[key] === state2[key], true);
     }
 
-    // TODO: create `areStatesEqual` based on memoize-state usage.
     const ImprovedComponent = realReactReduxConnect(
       localMapStateToProps && mapStateToPropsFabric,
       mapDispatchToProps,
