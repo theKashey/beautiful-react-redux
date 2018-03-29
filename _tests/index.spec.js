@@ -165,5 +165,32 @@ describe('Test', () => {
     spy.mockRestore();
   });
 
+  it('should support mapState fabric', () => {
+    let index  =0;
+    const mapStateToProps = () => {
+      const gen = index++;
+      return (state, props) => ({
+        number: state[props.keyName],
+        gen
+      });
+    };
+
+    const Component = ({number, gen}) => <span>{number} {gen}</span>;
+    const ConnectedComponent = connect(mapStateToProps)(Component);
+    const wrapper = mount(
+      <ReduxFocus focus={(state, props) => props.state} state={{key1: 1, key2: 2}}>
+        <ConnectedComponent keyName="key1"/> <ConnectedComponent keyName="key2"/>
+      </ReduxFocus>
+    );
+
+    expect(wrapper.find({keyName:'key1'}).filter(ConnectedComponent).text()).toBe('1 0');
+    expect(wrapper.find({keyName:'key2'}).filter(ConnectedComponent).text()).toBe('2 1');
+
+    wrapper.setProps({state: {key1: 11, key2: 22}});
+
+    expect(wrapper.find({keyName:'key1'}).filter(ConnectedComponent).text()).toBe('11 0');
+    expect(wrapper.find({keyName:'key2'}).filter(ConnectedComponent).text()).toBe('22 1');
+
+  });
 
 });

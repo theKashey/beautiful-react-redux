@@ -8,7 +8,6 @@ let config = {
 
 const realReactReduxConnect = reactReduxConnect;
 
-
 const connect = (mapStateToProps,
                  mapDispatchToProps,
                  mergeProps,
@@ -26,32 +25,57 @@ const connect = (mapStateToProps,
   return WrappedComponent => {
 
     let lastAffectedPaths = null;
+    let isFabric = 0;
     const affectedMap = {};
 
-    const localMapStateToProps = mapStateToProps && memoize(mapStateToProps, {strictArity: true})
-
     function mapStateToPropsFabric() {
-      function finalMapStateToProps(state, props) {
-        const result = localMapStateToProps(state, props);
+      let localMapStateToProps;
+      let firstCall = true;
+      let result;
 
-        if (!localMapStateToProps.cacheStatistics.lastCallWasMemoized) {
+      function finalMapStateToProps(state, props) {
+        if (firstCall) {
+          const defaultMapStateToProps = memoize(mapStateToProps, {strictArity: true});
+
+          if (isFabric === 0) {
+            result = defaultMapStateToProps(state, props);
+            if (typeof result === 'function') {
+              isFabric = 1;
+              functionDouble(finalMapStateToProps, result);
+            } else {
+              isFabric = -1;
+            }
+          }
+
+          if (isFabric === 1) {
+            localMapStateToProps = memoize(defaultMapStateToProps(state, props), {strictArity: true});
+          } else {
+            localMapStateToProps = defaultMapStateToProps;
+          }
+        }
+
+        result = localMapStateToProps(state, props);
+
+        if (firstCall || !localMapStateToProps.cacheStatistics.lastCallWasMemoized) {
           // get state related paths
           const affected = localMapStateToProps.getAffectedPaths()[0];
           affected.forEach(key => (affectedMap[key.split('.')[1]] = true));
           lastAffectedPaths = Object.keys(affectedMap);
         }
+
+        firstCall = false;
+
         return result;
       }
 
-      if (localMapStateToProps) {
-        functionDouble(finalMapStateToProps, localMapStateToProps);
+      functionDouble(finalMapStateToProps, mapStateToProps);
 
-        Object.defineProperty(finalMapStateToProps, 'trackedKeys', {
-          get: () => lastAffectedPaths,
-          configurable: true,
-          enumerable: false,
-        });
-      }
+      Object.defineProperty(finalMapStateToProps, 'trackedKeys', {
+        get: () => lastAffectedPaths,
+        configurable: true,
+        enumerable: false,
+      });
+
 
       return finalMapStateToProps;
     }
@@ -64,7 +88,7 @@ const connect = (mapStateToProps,
     }
 
     const ImprovedComponent = realReactReduxConnect(
-      localMapStateToProps && mapStateToPropsFabric,
+      mapStateToProps && mapStateToPropsFabric,
       mapDispatchToProps,
       mergeProps,
       Object.assign({areStatesEqual}, options)
@@ -85,7 +109,7 @@ const onNotPure = (...args) => config.onNotPure(...args);
 const connectAndCheck = (a, ...rest) => realReactReduxConnect(a ? shouldBePure(a, {onTrigger: onNotPure}) : a, ...rest);
 
 const setConfig = options => {
-  config = Object.assign(config,options);
+  config = Object.assign(config, options);
 };
 
 export {
