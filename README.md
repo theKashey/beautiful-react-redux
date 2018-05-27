@@ -8,7 +8,7 @@ Now your application will runs like it has MobX underneath.
 
 No updates when you dont expect them. For all. For free!
 
-[![NPM](https://nodei.co/npm/beautiful-react-redux.png?downloads=true&stars=true)](https://nodei.co/npm/beautiful-react-redux/)
+[![NPM](https://nodei.co/npm/beautiful-react-redux.png?downloads=true&stars=true)](https://nodei.co/npm/beautiful-react-redux/) [![Greenkeeper badge](https://badges.greenkeeper.io/theKashey/beautiful-react-redux.svg)](https://greenkeeper.io/)
 
 ## Usage
 
