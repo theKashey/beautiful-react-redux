@@ -3,7 +3,12 @@ import memoize, {shouldBePure} from 'memoize-state';
 import functionDouble from 'function-double';
 
 let config = {
-  onNotPure: (...args) => console.error(...args)
+  onNotPure: (name, ...args) => {
+    console.group(`why-did-you-update-redux: ${name}`)
+    console.log('mapStateToProps:', args[1]);
+    console.log('functions'+args[2]);
+    console.groupEnd();
+  }
 };
 
 const realReactReduxConnect = reactReduxConnect;
@@ -106,7 +111,19 @@ const connect = (mapStateToProps,
 
 
 const onNotPure = (...args) => config.onNotPure(...args);
-const connectAndCheck = (a, ...rest) => realReactReduxConnect(a ? shouldBePure(a, {onTrigger: onNotPure}) : a, ...rest);
+const connectAndCheck = (a, ...rest) => (
+  (WrappedComponent) => {
+    const Component = realReactReduxConnect(
+      a
+        ? shouldBePure(a, {
+          onTrigger: (...args) => onNotPure(Component.displayName || Component.name, ...args)
+        })
+        : a
+      , ...rest
+    )(WrappedComponent);
+    return Component;
+  }
+);
 
 const setConfig = options => {
   config = Object.assign(config, options);
