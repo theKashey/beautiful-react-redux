@@ -57,7 +57,7 @@
   "homepage": "https://github.com/theKashey/beautiful-react-redux#readme",
   "dependencies": {
     "function-double": "^1.0.4",
-    "memoize-state": "^1.5.1",
+    "memoize-state": "^2.0.0",
     "shallowequal": "^1.0.2"
   }
 }
