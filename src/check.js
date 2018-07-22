@@ -9,8 +9,8 @@ try {
 } catch (e) {
 
 }
-
-if (!patched) {
+// always try another way
+{
   try {
     reduxES.connect = connectAndCheck;
     patched = true;
