@@ -122,7 +122,8 @@ describe('Test', () => {
 
     const Component = ({number}) => <div>{number}</div>;
 
-    const spy = jest.spyOn(global.console, 'error')
+    const cb = jest.fn();
+    setConfig({onNotPure: cb})
 
     const ConnectedComponent = connectAndCheck(mapStateToProps)(Component);
     const wrapper = mount(
@@ -132,9 +133,7 @@ describe('Test', () => {
     );
     wrapper.setProps({state: {key1: 'key1-value', key2:2}});
 
-    expect(spy).toHaveBeenCalledWith("shouldBePure", expect.anything(),"`s result is not equal at [subObjec], while should be equal");
-
-    spy.mockRestore();
+    expect(cb).toHaveBeenCalledWith("Connect(Component)", expect.anything(), expect.anything(), "`s result is not equal at [subObjec], while should be equal");
   });
 
   it('should override callback', () => {
@@ -159,7 +158,7 @@ describe('Test', () => {
     wrapper.setProps({state: {key1: 'key1-value', key2:2}});
 
 
-    expect(cb).toHaveBeenCalledWith("shouldBePure", expect.anything(),"`s result is not equal at [subObjec], while should be equal");
+    expect(cb).toHaveBeenCalledWith("Connect(Component)", expect.anything(), expect.anything(), "`s result is not equal at [subObjec], while should be equal");
     expect(spy).not.toHaveBeenCalled();
 
     spy.mockRestore();
