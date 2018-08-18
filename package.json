@@ -1,6 +1,6 @@
 {
   "name": "beautiful-react-redux",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A magical tool to improve React-Redux performance",
   "main": "lib/index.js",
   "files": [
