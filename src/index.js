@@ -116,7 +116,8 @@ const connectAndCheck = (a, ...rest) => (
     const Component = realReactReduxConnect(
       a
         ? shouldBePure(a, {
-          onTrigger: (...args) => onNotPure(Component.displayName || Component.name, ...args)
+          onTrigger: (...args) => onNotPure(Component.displayName || Component.name, ...args),
+          checkAffectedKeys: false,
         })
         : a
       , ...rest
